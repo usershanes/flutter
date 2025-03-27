@@ -5,6 +5,7 @@ import 'package:layout/immutable_widget.dart';
 class BasicScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    // Scaffold 微件的用法
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.indigo,
