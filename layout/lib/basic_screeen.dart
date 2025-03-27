@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:layout/immutable_widget.dart';
+import 'package:layout/text_layout.dart';
 
 class BasicScreen extends StatelessWidget {
   @override
@@ -14,11 +15,15 @@ class BasicScreen extends StatelessWidget {
           Padding(padding: const EdgeInsets.all(10.0), child: Icon(Icons.edit),)
         ],
       ),
-      body: Center(
-        child: AspectRatio(
-          aspectRatio: 1.0,
-          child: ImmutableWidget(),
-        ),
+      body: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          AspectRatio(
+            aspectRatio: 1.0,
+            child: ImmutableWidget(),
+          ),
+          TextLayout()
+        ],
       ),
       drawer: Drawer(
         child: Container(
