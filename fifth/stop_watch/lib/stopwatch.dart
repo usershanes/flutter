@@ -7,9 +7,17 @@ class StopWatch extends StatefulWidget {
 }
 
 class StopWatchState extends State<StopWatch> {
-  int seconds = 0;
+  int milliseconds = 0;
   bool isTicking = true;
   Timer? timer;
+  final laps = <int>[];
+
+  void _lap() {
+    setState(() {
+      laps.add(milliseconds);
+      milliseconds = 0;
+    });
+  }
 
   /*
   @override
@@ -23,10 +31,13 @@ class StopWatchState extends State<StopWatch> {
    */
   void _onTick(Timer timer) {
     setState( () {
-      ++seconds;
+      milliseconds += 100;
     });
   }
-  String _secondsText() => seconds == 1 ? 'second' : 'seconds';
+  String _secondsText( int milliseconds ) {
+   final seconds =  milliseconds / 1000;
+   return '$seconds seconds';
+  }
 
   @override
   void dispose() {
@@ -38,7 +49,7 @@ class StopWatchState extends State<StopWatch> {
   @override
   Widget build(BuildContext context) {
     void _startTimer() {
-      timer = Timer.periodic(Duration( seconds: 1 ), _onTick );
+      timer = Timer.periodic(Duration( milliseconds: 100 ), _onTick );
       setState(() {
         isTicking = true;
       });
@@ -58,7 +69,7 @@ class StopWatchState extends State<StopWatch> {
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget> [
           Text(
-            '$seconds ${_secondsText()}',
+            '$milliseconds ${_secondsText()}',
             style: Theme.of(context).textTheme.headlineSmall,
           ),
           SizedBox(height: 20,),
